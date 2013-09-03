@@ -20,4 +20,17 @@ public class BulletScript : MonoBehaviour {
 	void Update () { 
 		//Physics engine handles movement, empty for now. 
 	} 
+	
+	void OnCollisionEnter(Collision collision) {
+		Collider collider = collision.collider;
+		
+		if(collider.CompareTag("Asteroids")) {
+			Asteroid roid = collider.gameObject.GetComponent<Asteroid>();
+			roid.Die();
+			Destroy(gameObject);
+		}
+		else {
+			Debug.Log("Collided with " + collider.tag);
+		}
+	}
 } 
